@@ -38,6 +38,8 @@ public class Admen extends AppCompatActivity {
 
             }
         });
+
+
         binding.more2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,17 +73,7 @@ public class Admen extends AppCompatActivity {
 
             }
         });
-        binding.more5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (binding.card5.getVisibility() == View.VISIBLE) {
-                    binding.card5.setVisibility(View.GONE);
-                } else {
-                    binding.card5.setVisibility(View.VISIBLE);
-                }
 
-            }
-        });
 
         binding.logout.setOnClickListener(new View.OnClickListener() {
             @Override

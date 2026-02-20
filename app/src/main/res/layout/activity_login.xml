@@ -107,59 +107,19 @@
                 android:text="تسجيل الدخول"
                 />
             
-            <TextView
-                android:id="@+id/or"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/login"
-                app:layout_constraintEnd_toEndOf="@id/login"
-                app:layout_constraintStart_toStartOf="@id/login"
-                android:layout_marginTop="20dp"
-                android:textColor="#949494"
-                android:text="أو التسجيل بإستخدام"/>
-            <LinearLayout
-                android:id="@+id/linear"
-                android:layout_width="300dp"
-                android:layout_height="50dp"
-                android:orientation="horizontal"
-                android:gravity="center"
-                app:layout_constraintStart_toStartOf="@id/login"
-                app:layout_constraintEnd_toEndOf="@id/login"
-                app:layout_constraintTop_toBottomOf="@id/or"
-                android:layout_marginTop="30dp">
-
-                <ImageView
-                    android:id="@+id/x"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/x"/>
-                <ImageView
-                    android:id="@+id/face"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/facrbook"/>
-                <ImageView
-                    android:id="@+id/google"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/google"/>
-
-            </LinearLayout>
 
             <TextView
                 android:id="@+id/hintsignup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="لا أمتلك حساب"
-                app:layout_constraintTop_toBottomOf="@id/linear"
-                app:layout_constraintRight_toRightOf="@id/linear"
+                app:layout_constraintTop_toBottomOf="@id/login"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
                 android:textColor="#949494"
                 android:textSize="15sp"
                 android:layout_marginTop="20dp"
-                android:layout_marginRight="50dp"/>
+                android:layout_marginLeft="50dp"/>
 
             <TextView
                 android:id="@+id/signup"

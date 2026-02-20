@@ -3,6 +3,7 @@ package com.example.mycart;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+
 @Entity
 public class User {
     @PrimaryKey(autoGenerate = true)

@@ -1,19 +1,14 @@
 package com.example.mycart;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -23,25 +18,21 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.example.mycart.databinding.ActivitySettingBinding;
+import com.example.mycart.databinding.ActivityEditProfileBinding;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 
-public class Setting extends AppCompatActivity {
-
-    ActivitySettingBinding binding;
-
-
-
+public class EditProfile extends AppCompatActivity {
+    private UserViewModel userViewModel;
+    private Uri imageUri;
+    private Long userId;
+    private User currentUser;
+    ActivityEditProfileBinding  binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        binding = ActivitySettingBinding.inflate(getLayoutInflater());
+        binding = ActivityEditProfileBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -49,9 +40,5 @@ public class Setting extends AppCompatActivity {
             return insets;
         });
 
-
-
     }
-
-
 }

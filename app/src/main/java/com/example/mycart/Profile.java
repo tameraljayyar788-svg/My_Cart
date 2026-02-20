@@ -94,6 +94,8 @@ public class Profile extends Fragment {
 
 
 
+
+
         return binding.getRoot();
     }
 }

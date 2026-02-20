@@ -15,8 +15,11 @@ public class Product {
     @ColumnInfo(name = "nameProduct")
     public String nameProduct;
 
-    @ColumnInfo(name = "PriceProduct")
-    public double price;
+    @ColumnInfo(name = "NewPrice")
+    public double Newprice;
+
+    @ColumnInfo(name = "OldPrice")
+    public double Oldprice;
 
     @ColumnInfo(name = "rateProduct")
     public float rate;
@@ -31,3 +34,5 @@ public class Product {
     public int CategoryInside;
 
 }
+
+
