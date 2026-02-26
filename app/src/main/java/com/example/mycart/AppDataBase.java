@@ -9,32 +9,38 @@ import androidx.room.RoomDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {User.class},
-        version = 1,exportSchema = false)
-
+@Database(entities = {
+        MainCategoryType.class,
+        SubCategory.class,
+        InnerCategory.class,
+        Product.class
+        , User.class
+}, version = 1)
 
 public abstract class AppDataBase extends RoomDatabase {
+
+    public abstract MainCategoryTypeDao mainCategoryTypeDao();
+    public abstract SubCategoryDao subCategoryDao();
+    public abstract InnerCategoryDao innerCategoryDao();
+    public abstract ProductDao productDao();
     public abstract UserDao userDao();
 
-    private static final ExecutorService DB_Executor= Executors.newFixedThreadPool(1);
 
-    public static volatile AppDataBase INSTANCE;
+    private static volatile AppDataBase INSTANCE;
 
-    public static AppDataBase getInstance(Context context){
-        if (INSTANCE == null){
-            synchronized (AppDataBase.class){
-                if (INSTANCE == null){
-                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            AppDataBase.class,"CourseHubRDB").fallbackToDestructiveMigration().build();
+    public static AppDataBase getInstance(Context context) {
+        if (INSTANCE == null) {
+            synchronized (AppDataBase.class) {
+                if (INSTANCE == null) {
+                    INSTANCE = Room.databaseBuilder(
+                            context.getApplicationContext(),
+                            AppDataBase.class,
+                            "MyCartDatabase"
+                    ).build();
                 }
             }
         }
         return INSTANCE;
     }
-
-    public static  ExecutorService getEcecutor(){
-        return DB_Executor;
-    }
-    public static final ExecutorService dataWriteExcuter = Executors.newFixedThreadPool(4);
 }
 
