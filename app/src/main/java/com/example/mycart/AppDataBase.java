@@ -9,20 +9,12 @@ import androidx.room.RoomDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {
-        MainCategoryType.class,
-        SubCategory.class,
-        InnerCategory.class,
-        Product.class
-        , User.class
-}, version = 1)
+@Database(entities = {User.class
+}, version = 2)
 
 public abstract class AppDataBase extends RoomDatabase {
 
-    public abstract MainCategoryTypeDao mainCategoryTypeDao();
-    public abstract SubCategoryDao subCategoryDao();
-    public abstract InnerCategoryDao innerCategoryDao();
-    public abstract ProductDao productDao();
+
     public abstract UserDao userDao();
 
 

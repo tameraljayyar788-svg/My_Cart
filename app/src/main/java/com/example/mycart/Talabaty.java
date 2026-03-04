@@ -25,7 +25,7 @@ public class Talabaty extends AppCompatActivity {
 
         // زر الرجوع
         binding.back.setOnClickListener(v -> {
-            startActivity(new Intent(Talabaty.this, Product.class));
+            startActivity(new Intent(Talabaty.this, MainProduct.class));
             finish();
         });
 
