@@ -27,13 +27,16 @@ public class PaymentMethod extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        binding.agree.setOnClickListener(new View.OnClickListener() {
+
+        binding.paymentMethode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(PaymentMethod.this,ChoosePayMent.class);
+                Intent intent = new Intent(PaymentMethod.this, ChoosePayMent.class);
                 startActivity(intent);
+
             }
         });
+
 
     }
 }
