@@ -20,9 +20,39 @@ import androidx.room.PrimaryKey;
 public class table_faivorate {
 
     @PrimaryKey(autoGenerate = true)
-    public int id;
+    private int id;
 
-    public int productId;
+    private int productId;
 
-    public long addedAt;
+    private long addedAt;
+
+    public table_faivorate(int id, int productId, long addedAt) {
+        this.id = id;
+        this.productId = productId;
+        this.addedAt = addedAt;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getProductId() {
+        return productId;
+    }
+
+    public void setProductId(int productId) {
+        this.productId = productId;
+    }
+
+    public long getAddedAt() {
+        return addedAt;
+    }
+
+    public void setAddedAt(long addedAt) {
+        this.addedAt = addedAt;
+    }
 }
