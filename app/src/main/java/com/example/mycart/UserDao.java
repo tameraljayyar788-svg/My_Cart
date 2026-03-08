@@ -7,21 +7,44 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import java.util.List;
+
 @Dao
 public interface UserDao {
+
     @Insert
-    Long insertUser(User user);
-     @Update
-    void updateUser(User user);
+    long insert(User user);
+
+    @Update
+    void update(User user);
+
     @Delete
-    void deleteUser(User user);
+    void delete(User user);
 
-    @Query("select * from User where email = :Email and password = :Password limit 1")
-    User loginUser(String Email , String Password);
-    @Query("select * from User where email = :Email limit 1")
-    User getUserByEmail(String Email);
+    @Query("SELECT * FROM users WHERE email = :email AND password = :password LIMIT 1")
+    User loginUser(String email, String password);
 
-    @Query("select * from User where id = :Id limit 1")
-    LiveData<User> getUserId(Long Id);
+    @Query("SELECT * FROM users WHERE email = :email LIMIT 1")
+    User getUserByEmail(String email);
 
+    @Query("SELECT * FROM users WHERE id = :id LIMIT 1")
+    LiveData<User> getUserById(Long id);
+
+    @Query("SELECT * FROM users WHERE isAdmin = 1")
+    LiveData<List<User>> getAdminUsers();
+
+    @Query("SELECT COUNT(*) FROM users WHERE email = :email")
+    int isEmailExists(String email);
+
+    @Query("UPDATE users SET imageProfile = :imagePath WHERE id = :userId")
+    void updateProfileImage(Long userId, String imagePath);
+
+    @Query("UPDATE users SET password = :newPassword WHERE id = :userId")
+    void updatePassword(Long userId, String newPassword);
+
+    @Query("DELETE FROM users WHERE id = :userId")
+    void deleteById(Long userId);
+
+    @Query("SELECT * FROM users")
+    LiveData<List<User>> getAllUsers();
 }

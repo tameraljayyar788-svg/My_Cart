@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyCart">
         <activity
+            android:name=".Show_Product"
+            android:exported="false" />
+        <activity
             android:name=".EditProfile"
             android:exported="false" />
         <activity

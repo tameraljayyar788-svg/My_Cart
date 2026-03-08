@@ -71,7 +71,7 @@ public class signup extends AppCompatActivity {
                             Toast.makeText(this, "This email is already registered", Toast.LENGTH_SHORT).show()
                     );
                     return;
-                }
+                }/*
                 User user = new User();
                 user.setUsername(name);
                 user.setEmail(email);
@@ -81,7 +81,7 @@ public class signup extends AppCompatActivity {
                     Toast.makeText(this, "Account created successfully", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(signup.this, login.class));
                     finish();
-                });
+                });*/
 
             }).start();
         });

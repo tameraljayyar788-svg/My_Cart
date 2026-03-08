@@ -1,5 +1,6 @@
 package com.example.mycart;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Index;
@@ -29,88 +30,70 @@ public class order_item {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
-    private int orderId;
+    @ColumnInfo(name = "orderId")
+    private long orderId;
 
-    private int productId;
+    @ColumnInfo(name = "productId")
+    private long productId;
 
+    @ColumnInfo(name = "name")
     private String name;
+
+    @ColumnInfo(name = "price")
     private double price;
+
+    @ColumnInfo(name = "discount")
+    private double discount;  // حقل ناقص
+
+    @ColumnInfo(name = "image")
     private String image;
+
+    @ColumnInfo(name = "quantity")
     private int quantity;
+
+    @ColumnInfo(name = "size")
     private String size;
 
-    public order_item(int id, int orderId, int productId, String name, double price, String image, int quantity, String size) {
-        this.id = id;
+    // Constructors
+    public order_item() {}
+
+    public order_item(long orderId, long productId, String name, double price,
+                      double discount, String image, int quantity, String size) {
         this.orderId = orderId;
         this.productId = productId;
         this.name = name;
         this.price = price;
+        this.discount = discount;
         this.image = image;
         this.quantity = quantity;
         this.size = size;
     }
 
-    public int getId() {
-        return id;
-    }
+    // Getters and Setters
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public long getOrderId() { return orderId; }
+    public void setOrderId(long orderId) { this.orderId = orderId; }
 
-    public int getOrderId() {
-        return orderId;
-    }
+    public long getProductId() { return productId; }
+    public void setProductId(long productId) { this.productId = productId; }
 
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
-    }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
-    public int getProductId() {
-        return productId;
-    }
+    public double getPrice() { return price; }
+    public void setPrice(double price) { this.price = price; }
 
-    public void setProductId(int productId) {
-        this.productId = productId;
-    }
+    public double getDiscount() { return discount; }
+    public void setDiscount(double discount) { this.discount = discount; }
 
-    public String getName() {
-        return name;
-    }
+    public String getImage() { return image; }
+    public void setImage(String image) { this.image = image; }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public int getQuantity() { return quantity; }
+    public void setQuantity(int quantity) { this.quantity = quantity; }
 
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public String getSize() {
-        return size;
-    }
-
-    public void setSize(String size) {
-        this.size = size;
-    }
+    public String getSize() { return size; }
+    public void setSize(String size) { this.size = size; }
 }

@@ -1,44 +1,61 @@
 package com.example.mycart;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity
-public class table_search {
+@Entity(
+        tableName = "searches",
+        foreignKeys = @ForeignKey(
+                entity = User.class,
+                parentColumns = "id",
+                childColumns = "userId",
+                onDelete = ForeignKey.CASCADE
+        ),
+        indices = @Index("userId")
+)public class table_search {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
+    @ColumnInfo(name = "userId")
+    private long userId;  // حقل ناقص مهم
+
+    @ColumnInfo(name = "query")
     private String query;
 
+    @ColumnInfo(name = "searchedAt")
     private long searchedAt;
 
-    public table_search(int id, String query, long searchedAt) {
-        this.id = id;
+    @ColumnInfo(name = "resultCount")
+    private int resultCount;
+
+    // Constructors
+    public table_search() {
+        this.searchedAt = System.currentTimeMillis();
+    }
+
+    public table_search(long userId, String query, int resultCount) {
+        this.userId = userId;
         this.query = query;
-        this.searchedAt = searchedAt;
+        this.resultCount = resultCount;
+        this.searchedAt = System.currentTimeMillis();
     }
 
-    public int getId() {
-        return id;
-    }
+    // Getters and Setters
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public long getUserId() { return userId; }
+    public void setUserId(long userId) { this.userId = userId; }
 
-    public String getQuery() {
-        return query;
-    }
+    public String getQuery() { return query; }
+    public void setQuery(String query) { this.query = query; }
 
-    public void setQuery(String query) {
-        this.query = query;
-    }
+    public long getSearchedAt() { return searchedAt; }
+    public void setSearchedAt(long searchedAt) { this.searchedAt = searchedAt; }
 
-    public long getSearchedAt() {
-        return searchedAt;
-    }
-
-    public void setSearchedAt(long searchedAt) {
-        this.searchedAt = searchedAt;
-    }
+    public int getResultCount() { return resultCount; }
+    public void setResultCount(int resultCount) { this.resultCount = resultCount; }
 }

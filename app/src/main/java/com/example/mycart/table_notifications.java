@@ -1,73 +1,91 @@
 package com.example.mycart;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity
-public class table_notifications {
+@Entity(
+        tableName = "notifications",
+        foreignKeys = @ForeignKey(
+                entity = User.class,
+                parentColumns = "id",
+                childColumns = "userId",
+                onDelete = ForeignKey.CASCADE
+        ),
+        indices = @Index("userId")
+)public class table_notifications {
     @PrimaryKey(autoGenerate = true)
     private Long id;
+
+    @ColumnInfo(name = "userId")
+    private Long userId;  // حقل ناقص مهم
+
+    @ColumnInfo(name = "title")
     private String title;
+
+    @ColumnInfo(name = "message")
     private String message;
-    private Long timetamp;
+
+    @ColumnInfo(name = "timestamp")
+    private Long timestamp;
+
+    @ColumnInfo(name = "type")
     private String type;
+
+    @ColumnInfo(name = "icon")
     private String icon;
 
+    @ColumnInfo(name = "isRead")
+    private boolean isRead;
 
-    public table_notifications(Long id, String title, String message, Long timetamp, String type, String icon) {
-        this.id = id;
+    @ColumnInfo(name = "relatedId")
+    private Long relatedId;
+
+    // Constructors
+    public table_notifications() {
+        this.timestamp = System.currentTimeMillis();
+        this.isRead = false;
+    }
+
+    public table_notifications(Long userId, String title, String message,
+                               String type, String icon, Long relatedId) {
+        this.userId = userId;
         this.title = title;
         this.message = message;
-        this.timetamp = timetamp;
         this.type = type;
         this.icon = icon;
+        this.relatedId = relatedId;
+        this.timestamp = System.currentTimeMillis();
+        this.isRead = false;
     }
 
-    public Long getId() {
-        return id;
-    }
+    // Getters and Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public Long getUserId() { return userId; }
+    public void setUserId(Long userId) { this.userId = userId; }
 
-    public String getTitle() {
-        return title;
-    }
+    public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    public String getMessage() { return message; }
+    public void setMessage(String message) { this.message = message; }
 
-    public String getMessage() {
-        return message;
-    }
+    public Long getTimestamp() { return timestamp; }
+    public void setTimestamp(Long timestamp) { this.timestamp = timestamp; }
 
-    public void setMessage(String message) {
-        this.message = message;
-    }
+    public String getType() { return type; }
+    public void setType(String type) { this.type = type; }
 
-    public Long getTimetamp() {
-        return timetamp;
-    }
+    public String getIcon() { return icon; }
+    public void setIcon(String icon) { this.icon = icon; }
 
-    public void setTimetamp(Long timetamp) {
-        this.timetamp = timetamp;
-    }
+    public boolean isRead() { return isRead; }
+    public void setRead(boolean read) { isRead = read; }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
-    }
+    public Long getRelatedId() { return relatedId; }
+    public void setRelatedId(Long relatedId) { this.relatedId = relatedId; }
 }

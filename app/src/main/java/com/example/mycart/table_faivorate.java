@@ -1,5 +1,6 @@
 package com.example.mycart;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Index;
@@ -13,46 +14,51 @@ import androidx.room.PrimaryKey;
                         parentColumns = "id",
                         childColumns = "productId",
                         onDelete = ForeignKey.CASCADE
+                ),
+                @ForeignKey(
+                        entity = User.class,
+                        parentColumns = "id",
+                        childColumns = "userId",
+                        onDelete = ForeignKey.CASCADE
                 )
         },
-        indices = {@Index("productId")}
+        indices = {@Index(value = {"productId", "userId"}, unique = true)}
 )
 public class table_faivorate {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
 
-    private int productId;
+    @ColumnInfo(name = "userId")
+    private long userId;  // حقل ناقص مهم
 
+    @ColumnInfo(name = "productId")
+    private long productId;
+
+    @ColumnInfo(name = "addedAt")
     private long addedAt;
 
-    public table_faivorate(int id, int productId, long addedAt) {
-        this.id = id;
+    // Constructors
+    public table_faivorate() {
+        this.addedAt = System.currentTimeMillis();
+    }
+
+    public table_faivorate(long userId, long productId) {
+        this.userId = userId;
         this.productId = productId;
-        this.addedAt = addedAt;
+        this.addedAt = System.currentTimeMillis();
     }
 
-    public int getId() {
-        return id;
-    }
+    // Getters and Setters
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public long getUserId() { return userId; }
+    public void setUserId(long userId) { this.userId = userId; }
 
-    public int getProductId() {
-        return productId;
-    }
+    public long getProductId() { return productId; }
+    public void setProductId(long productId) { this.productId = productId; }
 
-    public void setProductId(int productId) {
-        this.productId = productId;
-    }
-
-    public long getAddedAt() {
-        return addedAt;
-    }
-
-    public void setAddedAt(long addedAt) {
-        this.addedAt = addedAt;
-    }
+    public long getAddedAt() { return addedAt; }
+    public void setAddedAt(long addedAt) { this.addedAt = addedAt; }
 }
