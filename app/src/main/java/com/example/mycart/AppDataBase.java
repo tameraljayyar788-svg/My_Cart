@@ -1,76 +1,91 @@
 package com.example.mycart;
 
 import android.content.Context;
-
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
-
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {
-        // جدول المستخدمين
+@Database(
+    entities = {
+        // User Related Entities
         User.class,
-
-        // جداول التصنيفات
-        FirstCategory.class,
-        SecondCategory.class,
-        CategorisInside.class,
-
-        // جدول المنتجات
+        Address.class,
+        
+        // Category Entities
+        table_firstCategory.class,
+        table_secondCategory.class,
+        table_CategorisInside.class,
+        table_category.class,
+        
+        // Product Entities
         table_product.class,
-
-        // جداول المقاسات
-        Sizes.class,
+        table_sizes.class,
         table_productSizes.class,
-
-        // جداول السلة والمفضلة
+        
+        // Cart & Favorite Entities
         table_cart.class,
         table_faivorate.class,
-
-        // جداول العناوين
-        Address.class,
-
-        // جداول الطلبات
+        
+        // Order Entities
         table_order.class,
         order_item.class,
-
-        // جداول البحث والإشعارات
-        table_search.class,
-        table_notifications.class,
-
-        // جداول الدفع
+        
+        // Payment Entities
         table_paymentMethode.class,
-        table_visa.class
-}, version = 2, exportSchema = false)
-
-@TypeConverters({Converters.class})  // للتعامل مع أنواع البيانات المعقدة
+        table_visa.class,
+        
+        // Other Entities
+        table_search.class,
+        table_notifications.class
+    },
+    version = 1,
+    exportSchema = false
+)
+@TypeConverters({Converters.class})
 public abstract class AppDataBase extends RoomDatabase {
-
+    
+    // ============= User DAOs =============
     public abstract UserDao userDao();
-    public abstract table_firstCategoryDao firstCategoryDao();
-    public abstract table_secondCategoryDao secondCategoryDao();
-    public abstract table_CategorisInside daoTable_categorisInside();
-    public abstract dao_product productDao();
-    public abstract dao_cart cartDao();
-    public abstract dao_favoraite favoriteDao();
-    public abstract dao_order orderDao();
-    public abstract dao_orderItem orderItemDao();
-    public abstract dao_address addressDao();
-    public abstract dao_search searchDao();
-    public abstract dao_notification notificationDao();
-    public abstract dao_paymentMethodde paymentMethodDao();
-    public abstract dao_visa visaDao();
-    public abstract dao_size sizeDao();
-    public abstract dao_productSize productSizeDao();
+    public abstract AddressDao addressDao();
+    
+    // ============= Category DAOs =============
+    public abstract FirstCategoryDao firstCategoryDao();
+    public abstract SecondCategoryDao secondCategoryDao();
+    public abstract CategorisInsideDao categorisInsideDao();
+    public abstract CategoryDao categoryDao();
+    
+    // ============= Product DAOs =============
+    public abstract ProductDao productDao();
+    public abstract SizeDao sizeDao();
+    public abstract ProductSizeDao productSizeDao();
+    
+    // ============= Cart & Favorite DAOs =============
+    public abstract CartDao cartDao();
+    public abstract FavoriteDao favoriteDao();
+    
+    // ============= Order DAOs =============
+    public abstract OrderDao orderDao();
+    public abstract OrderItemDao orderItemDao();
+    
+    // ============= Payment DAOs =============
+    public abstract PaymentMethodDao paymentMethodDao();
+    public abstract VisaDao visaDao();
+    
+    // ============= Other DAOs =============
+    public abstract SearchDao searchDao();
+    public abstract NotificationDao notificationDao();
+    
+    // ============= Singleton Pattern =============
     private static volatile AppDataBase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
-
+    
     public static final ExecutorService databaseWriteExecutor =
             Executors.newFixedThreadPool(NUMBER_OF_THREADS);
-
+    
+    // ============= Get Instance Method =============
     public static AppDataBase getInstance(Context context) {
         if (INSTANCE == null) {
             synchronized (AppDataBase.class) {
@@ -78,13 +93,12 @@ public abstract class AppDataBase extends RoomDatabase {
                     INSTANCE = Room.databaseBuilder(
                                     context.getApplicationContext(),
                                     AppDataBase.class,
-                                    "MyCartDatabase")
-                            .fallbackToDestructiveMigration()  // للتطوير فقط
+                                    "my_cart_database")
+                            .fallbackToDestructiveMigration()  // For development only
                             .build();
                 }
             }
         }
         return INSTANCE;
     }
-    }
-
+}
